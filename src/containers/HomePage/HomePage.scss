@@ -1,0 +1,113 @@
+.homepage-container {
+    display         : flex;
+    flex-direction  : column;
+    height          : 100vh;
+    width           : 1080px;
+    margin          : 0 auto;
+    background-color: #2d2d2d;
+    color           : #fff;
+
+    .homeheader-container {
+        display      : flex;
+        width        : 100%;
+        border-bottom: 1px solid #525252;
+
+        .header-logo {
+            height: 50%;
+            width : inherit;
+            flex  : 1;
+
+            .logo {
+                height             : 50px;
+                width              : 100%;
+                background-image   : url("../../assets/header/logo-header.png");
+                background-repeat  : no-repeat;
+                background-position: center;
+                background-size    : contain;
+            }
+        }
+
+        .homeheader-search-bar {
+            display        : flex;
+            align-items    : center;
+            justify-content: center;
+            padding        : 10px;
+
+            i {
+                margin: 0 5px;
+            }
+
+            .input-search {
+                width     : 400px;
+                height    : 30px;
+                background: #000;
+                outline   : none;
+                border    : none;
+            }
+        }
+
+        .header-navigate {
+            display: flex;
+
+            .custom-nav-link {
+                padding         : 7px 10px;
+                margin          : 3px;
+                font-size       : 20px;
+                display         : inline-flex;
+                background-color: #000;
+                border          : 1px solid #404040;
+                cursor          : pointer;
+
+                i {
+                    text-align: center;
+                    margin    : auto 0;
+                }
+            }
+        }
+    }
+
+    .homepage-content {
+        height: 70%
+    }
+
+    .homefooter-container {
+        height    : 15%;
+        border-top: 1px solid #525252;
+        padding   : 30px 0;
+
+        .homefooter-content {
+            display    : flex;
+            align-items: center;
+        }
+
+        .footer-logo {
+            height             : 50px;
+            width              : 100%;
+            background-image   : url("../../assets/footer/logo-footer.png");
+            background-repeat  : no-repeat;
+            background-position: center;
+            background-size    : contain;
+            float              : left;
+        }
+
+        .footer-advertise {
+            height             : 50px;
+            width              : 100%;
+            background-image   : url("https://i.imgur.com/AlQKvFW.png");
+            background-repeat  : no-repeat;
+            background-position: center;
+            background-size    : contain;
+            float              : right;
+        }
+    }
+}
+
+.red-icon {
+    background-color: #ab3e3e !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .homepage-container {
+        width: 100% !important;
+    }
+}

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { FormattedMessage } from 'react-intl';
-import HomeHeader from './HomeHeader';
-import HomeFooter from './HomeFooter';
-import './HomePage.scss';
-class HomePage extends Component {
+// import './HomeFooter.scss';
+class HomeFooter extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,10 +23,11 @@ class HomePage extends Component {
 
     render() {
         return (
-            <div className="homepage-container">
-            <HomeHeader/>
-            <div className="homepage-content">HomePage</div>
-            <HomeFooter/>
+            <div className="homefooter-container">
+                <div className="homefooter-content">
+                    <div className="footer-logo"></div>
+                    <div className="footer-advertise"></div>
+                </div>
             </div>
         );
     }
@@ -45,4 +44,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeFooter);

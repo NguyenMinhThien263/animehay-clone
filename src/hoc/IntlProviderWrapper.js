@@ -20,8 +20,9 @@ class IntlProviderWrapper extends Component {
         const { children, language } = this.props;
         return (
             <IntlProvider
-                locale={language}
-                defaultLocale="vi">
+                // locale={language}
+                // defaultLocale="vi"
+                >
                 {children}
             </IntlProvider>
         );
