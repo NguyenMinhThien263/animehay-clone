@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { FormattedMessage } from 'react-intl';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+
+import GenreList from './Genre/GenreList';
 // import './HomeHeader.scss';
 class HomeHeader extends Component {
     constructor(props) {
@@ -8,6 +11,7 @@ class HomeHeader extends Component {
         this.state = {
             //UI
             isShowIcon: false,
+            dropdownOpen: false,
         };
     }
 
@@ -26,10 +30,17 @@ class HomeHeader extends Component {
             isShowIcon: !this.state.isShowIcon,
         });
     }
+    toggle = () => {
+        this.setState({
+            dropdownOpen: !this.state.dropdownOpen,
+        });
+    }
     render() {
         const { isShowIcon } = this.state;
+        const { isMobile } = this.props;
+
         return (
-            <div className="homeheader-container">
+            <div className={`homeheader-container ${isMobile ? 'mobile' : ''}`}>
                 <div className="header-logo">
                     <div className="logo"></div>
                 </div>
@@ -52,7 +63,13 @@ class HomeHeader extends Component {
                         }
                     </div>
                     <div className="custom-nav-link">
-                        <i className="fas fa-bars"></i>
+                        <Dropdown isOpen={this.state.dropdownOpen} toggle={() => this.toggle()}>
+                            <DropdownToggle>
+                                <i className="fas fa-bars"></i>
+                            </DropdownToggle>
+                            <GenreList />
+
+                        </Dropdown>
                     </div>
                     <div className="custom-nav-link">
                         <i className="fas fa-history"></i>

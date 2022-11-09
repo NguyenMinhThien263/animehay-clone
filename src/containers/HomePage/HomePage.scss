@@ -1,21 +1,21 @@
 .homepage-container {
     display         : flex;
     flex-direction  : column;
-    height          : 100vh;
     width           : 1080px;
     margin          : 0 auto;
     background-color: #2d2d2d;
     color           : #fff;
 
     .homeheader-container {
-        display      : flex;
-        width        : 100%;
-        border-bottom: 1px solid #525252;
+        height         : 5%;
+        display        : flex;
+        width          : 100%;
+        border-bottom  : 1px solid #525252;
+        justify-content: space-between;
 
         .header-logo {
             height: 50%;
             width : inherit;
-            flex  : 1;
 
             .logo {
                 height             : 50px;
@@ -67,11 +67,19 @@
     }
 
     .homepage-content {
-        height: 70%
+        .list-film {
+            display      : flex;
+            flex-wrap    : wrap;
+            align-items  : center;
+            background   : #404040;
+            padding      : 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
     }
 
     .homefooter-container {
-        height    : 15%;
+        height    : 5%;
         border-top: 1px solid #525252;
         padding   : 30px 0;
 
@@ -106,8 +114,34 @@
     background-color: #ab3e3e !important;
 }
 
+.slick-slider.slick-initialized {
+    height: 310px;
+
+    .slick-dots {
+        bottom: 0 !important;
+    }
+}
+
+.dropdown {
+    button {
+        all: unset;
+
+        &:hover {
+            all: unset;
+        }
+    }
+}
+
 @media only screen and (max-width: 768px) {
     .homepage-container {
         width: 100% !important;
+
+        .homeheader-container {
+
+            .header-logo {
+                height: 50%;
+                width : 90px;
+            }
+        }
     }
 }
