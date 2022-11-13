@@ -13,14 +13,14 @@ import { path } from '../utils'
 
 import Home from '../routes/Home';
 import Login from '../routes/Login';
-import Header from './Header/Header';
+
 import System from '../routes/System';
 import HomePage from '../containers/HomePage/HomePage';
 
 import { CustomToastCloseButton } from '../components/CustomToast';
 import ConfirmModal from '../components/ConfirmModal';
 import CustomScrollbars from '../components/CustomScrollbars';
-
+import 'react-image-lightbox/style.css';
 
 class App extends Component {
 
@@ -47,8 +47,6 @@ class App extends Component {
             <Fragment>
                 <Router history={history}>
                     <div className="main-container">
-                        <ConfirmModal />
-                        {this.props.isLoggedIn && <Header />}
 
                         <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
                             <Switch>
@@ -60,6 +58,18 @@ class App extends Component {
                         </CustomScrollbars>
                     </div>
                 </Router>
+                <ToastContainer
+                    position="bottom-right"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="colored"
+                />
             </Fragment>
         )
     }

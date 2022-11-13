@@ -1,30 +1,47 @@
 import actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    // isLoggedIn: false,
-    // adminInfo: null
+    allCodeData: [],
+    filmData:[],
 }
 
 const appReducer = (state = initialState, action) => {
+    let copyState = [];
     switch (action.type) {
-        case actionTypes.ADMIN_LOGIN_SUCCESS:
-            // return {
-            //     ...state,
-            //     isLoggedIn: true,
-            //     adminInfo: action.adminInfo
-            // }
-        case actionTypes.ADMIN_LOGIN_FAIL:
-            // return {
-            //     ...state,
-            //     isLoggedIn: false,
-            //     adminInfo: null
-            // }
-        case actionTypes.PROCESS_LOGOUT:
-            // return {
-            //     ...state,
-            //     isLoggedIn: false,
-            //     adminInfo: null
-            // }
+        case actionTypes.GET_ALLCODE_BY_TYPE_START:
+            copyState = { ...state };
+            return {
+                ...copyState
+            }
+        case actionTypes.GET_ALLCODE_BY_TYPE_SUCCESS:
+            copyState = { ...state };
+            copyState.allCodeData = action.data;
+            return {
+                ...copyState
+            }
+        case actionTypes.GET_ALLCODE_BY_TYPE_FAIL:
+            copyState = { ...state };
+            copyState.allCodeData = []
+            return {
+                ...copyState
+            }
+        case actionTypes.FETCH_FILM_START:
+            copyState = { ...state };
+            return {
+                ...copyState
+            }
+        case actionTypes.FETCH_FILM_SUCCESS:
+            copyState = { ...state };
+            copyState.filmData = action.data;
+            return {
+                ...copyState
+            }
+        case actionTypes.FETCH_FILM_FAIL:
+            copyState = { ...state };
+            copyState.filmData = []
+            return {
+                ...copyState
+            }
         default:
             return state;
     }

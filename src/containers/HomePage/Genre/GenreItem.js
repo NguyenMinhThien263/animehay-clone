@@ -22,8 +22,11 @@ class GenreItem extends Component {
     }
 
     render() {
+        const { keyMap, value } = this.props;
         return (
-            <div className=""></div>
+            <div className="genre-item-container">
+                <div className="genre-item-value">{value}</div>
+            </div>
         );
     }
 }

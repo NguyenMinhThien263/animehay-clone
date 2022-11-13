@@ -15,19 +15,20 @@ class HomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isMobile: false,
+            windowWidth: window.innerWidth,
         };
     }
 
 
     componentDidMount() {
         this.resizeScreen();
+
     }
     componentDidUpdate(prevProps, prevState) {
         if (this.props.language !== prevProps.language) {
 
         }
-        if (this.state.isMobile !== prevState.isMobile) {
+        if (this.state.windowWidth !== prevState.windowWidth) {
             this.resizeScreen();
         }
 
@@ -35,7 +36,7 @@ class HomePage extends Component {
     resizeScreen = () => {
         window.addEventListener('resize', () => {
             this.setState({
-                isMobile: window.innerWidth > 1200
+                windowWidth: window.innerWidth
             });
         }, false);
     }
@@ -44,19 +45,20 @@ class HomePage extends Component {
         const settings = {
             dots: true,
             arrows: false,
-            // infinite: true,
+            infinite: true,
             slidesToShow: 3,
             slidesToScroll: 1,
-            // autoplay: true,
-            // speed: 500,
-            // autoplaySpeed: 2000,
-            // cssEase: "linear"
+            autoplay: true,
+            speed: 500,
+            autoplaySpeed: 2000,
+            cssEase: "linear"
         };
-        const { isMobile } = this.state;
+        const { windowWidth } = this.state;
+        let isMobile = windowWidth > 1200
         return (
             <div className="homepage-container">
                 <HomeHeader
-                isMobile={isMobile}
+                    isMobile={isMobile}
                 />
                 <div className="homepage-content">
                     {isMobile &&
@@ -118,6 +120,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+
     };
 };
 

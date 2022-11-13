@@ -44,14 +44,14 @@ class Login extends Component {
 
     redirectToSystemPage = () => {
         const { navigate } = this.props;
-        const redirectPath = '/system/user-manage';
+        const redirectPath = '/system/film-manage';
         navigate(`${redirectPath}`);
     }
 
     processLogin = () => {
         const { username, password } = this.state;
 
-        const { adminLoginSuccess, adminLoginFail } = this.props;
+        const { userLoginSuccess, userLoginFail } = this.props;
         let loginBody = {
             username: 'admin',
             password: '123456'
@@ -64,7 +64,7 @@ class Login extends Component {
             "accessToken": "eyJhbGciOiJIU"
         }
 
-        adminLoginSuccess(adminInfo);
+        userLoginSuccess(adminInfo);
         this.refresh();
         this.redirectToSystemPage();
         try {
