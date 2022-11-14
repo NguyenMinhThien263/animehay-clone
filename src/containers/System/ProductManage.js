@@ -16,7 +16,6 @@ class ProductManage extends Component {
         this.props.getAllcodeByTypeStart();
     }
     handleSelectedMultiple = (selectedGenre) => {
-        console.log('check multi select', selectedGenre);
         this.setState({ selectedGenre });
     };
     buildAllCodeData = (inputData) => {

@@ -3,6 +3,9 @@ import {
     getAllcodeByType,
     saveFilm,
     getAllFilms,
+    getOneFilm,
+    editFilm,
+    deleteFilm,
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 //Allcode
@@ -43,7 +46,7 @@ export const getAllcodeByTypeSuccess = (data) => ({
 export const getAllcodeByTypeFail = () => ({
     type: actionTypes.GET_ALLCODE_BY_TYPE_FAIL,
 })
-//Film
+//CreateFilm
 export const createFilmStart = (data) => {
     return async (dispatch, getState) => {
         try {
@@ -51,7 +54,7 @@ export const createFilmStart = (data) => {
             if (res && res.errCode === 0) {
                 toast.success("Create Film Success")
                 dispatch(createFilmSuccess())
-                dispatch(fetchAllFilmStart())
+                dispatch(fetchAllFilmStart(data.page, data.pageSize))
             } else {
                 dispatch(createFilmFail())
             }
@@ -69,7 +72,7 @@ export const createFilmSuccess = (data) => ({
 export const createFilmFail = () => ({
     type: actionTypes.CREATE_FILM_FAIL,
 })
-//Allcode
+//getAllFilms
 export const fetchAllFilmStart = (page, size) => {
     return async (dispatch, getState) => {
         try {
@@ -98,4 +101,56 @@ export const fetchAllFilmSuccess = (data) => ({
 })
 export const fetchAllFilmFail = () => ({
     type: actionTypes.FETCH_FILM_FAIL,
+})
+//EditFilm
+export const editFilmStart = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await editFilm(data);
+            if (res && res.errCode === 0) {
+                toast.success("Edit Film Success")
+                dispatch(editFilmSuccess())
+                dispatch(fetchAllFilmStart(data.page, data.pageSize))
+            } else {
+                dispatch(editFilmFail())
+            }
+        } catch (error) {
+            toast.error("Edit Film failed");
+            dispatch(editFilmFail())
+            console.log(`${actionTypes.EDIT_FILM_FAIL}:`, error);
+        }
+    }
+}
+
+export const editFilmSuccess = () => ({
+    type: actionTypes.EDIT_FILM_SUCCESS,
+})
+export const editFilmFail = () => ({
+    type: actionTypes.EDIT_FILM_FAIL,
+})
+//DeleteFilm
+export const deleteFilmStart = (data, page, pageSize) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await deleteFilm(data.id);
+            if (res && res.errCode === 0) {
+                toast.success("Delete Film Success")
+                dispatch(deleteFilmSuccess())
+                dispatch(fetchAllFilmStart(page, pageSize))
+            } else {
+                dispatch(deleteFilmFail())
+            }
+        } catch (error) {
+            toast.error("Delete Film failed");
+            dispatch(deleteFilmFail())
+            console.log(`${actionTypes.DELETE_FILM_FAIL}:`, error);
+        }
+    }
+}
+
+export const deleteFilmSuccess = () => ({
+    type: actionTypes.DELETE_FILM_SUCCESS,
+})
+export const deleteFilmFail = () => ({
+    type: actionTypes.DELETE_FILM_FAIL,
 })

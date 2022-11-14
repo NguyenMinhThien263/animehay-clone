@@ -67,31 +67,44 @@ class FilmManage extends Component {
         if (prevProps.allCodeData.yearData !== this.props.allCodeData.yearData) {
             this.setState({ allYear: this.buildAllCodeData(this.props.allCodeData.yearData), });
         }
-        if (prevProps.filmData !== this.props.filmData) {
+        if (prevState.page !== this.state.page) {
             let { filmData } = this.props;
             let { page, pageSize } = this.state;
             let params = this.getRequestParams(page, pageSize);
-            // this.props.fetchAllFilmStart(params.page, params.size)
+            this.props.fetchAllFilmStart(params.page, params.size)
             this.setState({
                 allFilm: filmData.films,
                 count: filmData.totalPages
             });
         }
-        // if (prevProps.filmData !== this.props.filmData) {
-        // this.setState({
-        //     selectedStatus: '',
-        //     selectedGenre: '',
-        //     selectedYear: '',
-        //     filmName: '',
-        //     subFilmName: '',
-        //     scorePoint: '',
-        //     totalEps: '',
-        //     description: '',
-        //     avatar: '',
-        //     previewImgURL: '',
-        //     action: CRUD_ACTIONS.CREATE,
-        // })
-        // }
+        if (prevState.pageSize !== this.state.pageSize) {
+            let { filmData } = this.props;
+            let { page, pageSize } = this.state;
+            let params = this.getRequestParams(page, pageSize);
+            this.props.fetchAllFilmStart(params.page, params.size)
+            this.setState({
+                allFilm: filmData.films,
+                count: filmData.totalPages
+            });
+        }
+        if (prevProps.filmData !== this.props.filmData) {
+            let { filmData } = this.props;
+            this.setState({
+                allFilm: filmData.films,
+                count: filmData.totalPages,
+                selectedStatus: '',
+                selectedGenre: '',
+                selectedYear: '',
+                filmName: '',
+                subFilmName: '',
+                scorePoint: '',
+                totalEps: '',
+                description: '',
+                avatar: '',
+                previewImgURL: '',
+                action: CRUD_ACTIONS.CREATE,
+            })
+        }
     }
     handleChangeSelectOption = (selectedOption, name) => {
         let stateName = name.name;
@@ -135,55 +148,40 @@ class FilmManage extends Component {
             }
             valueArr.push(object)
         })
-        // if (action === CRUD_ACTIONS.CREATE) {
-        this.props.createFilmStart({
-            id: '',
-            selectedStatus: !this.state.selectedStatus ? '' : this.state.selectedStatus.value,
-            selectedGenre: valueArr ? valueArr : [],
-            selectedYear: !this.state.selectedYear ? '' : this.state.selectedYear.value,
-            filmName: this.state.filmName,
-            subFilmName: this.state.subFilmName,
-            scorePoint: this.state.scorePoint,
-            totalEps: this.state.totalEps,
-            description: this.state.description,
-            avatar: this.state.avatar,
-        })
-        // }
-        // if (action === CRUD_ACTIONS.EDIT) {
-        //     this.props.editFilmStart({
-        //         id: this.state.filmEditId,
-        //         selectedStatus: !this.state.selectedStatus ? '' : this.state.selectedStatus.value,
-        //         selectedGenre: valueArr ? valueArr : [],
-        //         selectedYear: !this.state.selectedYear ? '' : this.state.selectedYear.value,
-        //         filmName: this.state.filmName,
-        //         subFilmName: this.state.subFilmName,
-        //         scorePoint: this.state.scorePoint,
-        //         totalEps: this.state.totalEps,
-        //         description: this.state.description,
-        //         avatar: this.state.avatar,
-        //     })
-        // }
-        console.log('check click state', this.state);
-    }
-    getInfoFilmFromParent = (film) => {
-        let imageBase64 = '';
-        if (film.image) {
-            imageBase64 = Buffer.from(film.image, 'base64').toString('binary');
+        if (action === CRUD_ACTIONS.CREATE) {
+            this.props.createFilmStart({
+                id: '',
+                selectedStatus: !this.state.selectedStatus ? '' : this.state.selectedStatus.value,
+                selectedGenre: valueArr ? valueArr : [],
+                selectedYear: !this.state.selectedYear ? '' : this.state.selectedYear.value,
+                filmName: this.state.filmName,
+                subFilmName: this.state.subFilmName,
+                scorePoint: this.state.scorePoint,
+                totalEps: this.state.totalEps,
+                description: this.state.description,
+                avatar: this.state.avatar,
+                page: 0,
+                pageSize: 3,
+            })
         }
-        this.setState({
-            selectedStatus: '',
-            selectedGenre: '',
-            selectedYear: '',
-            filmName: '',
-            subFilmName: '',
-            scorePoint: '',
-            totalEps: '',
-            description: '',
-            avatar: '',
-            filmEditId: '',
-            previewImgURL: '',
-            action: '',
-        });
+        if (action === CRUD_ACTIONS.EDIT) {
+            this.props.editFilmStart({
+                id: this.state.filmEditId,
+                selectedStatus: !this.state.selectedStatus ? '' : this.state.selectedStatus.value,
+                selectedGenre: valueArr ? valueArr : [],
+                selectedYear: !this.state.selectedYear ? '' : this.state.selectedYear.value,
+                filmName: this.state.filmName,
+                subFilmName: this.state.subFilmName,
+                scorePoint: this.state.scorePoint,
+                totalEps: this.state.totalEps,
+                description: this.state.description,
+                avatar: this.state.avatar,
+                page: 0,
+                pageSize: 3,
+            })
+        }
+        this.setState({ page: 1 });
+        console.log('check click state', this.state);
     }
     getRequestParams = (page, pageSize) => {
         let params = {};
@@ -196,7 +194,6 @@ class FilmManage extends Component {
         return params;
     };
     handlePageSizeChange = (event) => {
-        console.log('check event', event);
         this.setState({
             pageSize: event.target.value,
             page: 1
@@ -213,10 +210,51 @@ class FilmManage extends Component {
         } while (i <= 10);
         return pageSizes;
     }
+    getInfoFilmFromParent = async (film) => {
+        let imageBase64 = '';
+        if (film.image) {
+            imageBase64 = Buffer.from(film.image, 'base64').toString('binary');
+        }
+        let statusData = this.changeIntoDropdownValue(film.statusData, 'status');
+        let yearData = this.changeIntoDropdownValue(film.yearData, 'year');
+        let genreData = this.changeIntoDropdownValue(film.genreData, 'genre');
+        await this.setState({
+            selectedStatus: statusData.object,
+            selectedGenre: genreData.arr,
+            selectedYear: yearData.object,
+            filmName: film.title,
+            subFilmName: film.subTitle,
+            scorePoint: film.scrores,
+            totalEps: film.totalEpisode,
+            description: film.description,
+            avatar: '',
+            filmEditId: film.id,
+            previewImgURL: imageBase64,
+            action: CRUD_ACTIONS.EDIT,
+        });
+        console.log('check edit', this.state);
+    }
+    changeIntoDropdownValue = (data, name) => {
+        let object = {};
+        let arr = []
+        if (name && name === 'genre') {
+            data.map(item => {
+                object = {
+                    value: item.keyMap,
+                    label: item.value,
+                };
+                arr.push(object)
+            })
+        } else {
+            object.value = data.keyMap
+            object.label = data.value
+        }
+        return { object, arr }
+    }
     render() {
-        let { allFilm, filmName, subFilmName, scorePoint, totalEps, description, pageSize, count, page, pageSizes } = this.state;
-        console.log('check props', this.props);
-        console.log('check state', this.state);
+        let { allFilm, filmName, subFilmName, scorePoint, totalEps, description, pageSize, count, page, pageSizes, action } = this.state;
+        // console.log('check props', this.props);
+        // console.log('check state', this.state);
         return (
             <div className="film-container">
                 <div className="title-page text-center">Quản lý phim</div>
@@ -314,7 +352,8 @@ class FilmManage extends Component {
                             ></textarea>
                         </div>
                     </div>
-                    <button className="btn btn-primary mt-3" onClick={() => this.saveInforFilm()}>Lưu Thông Tin</button>
+                    <button className={`btn ${action === CRUD_ACTIONS.CREATE ? 'btn-primary' : 'btn-warning'} mt-3`} onClick={() => this.saveInforFilm()}>
+                        {`${action === CRUD_ACTIONS.CREATE ? 'Tạo' : 'Lưu'}`} Thông Tin</button>
                     <div className="mt-3">
                         {"Items per Page: "}
                         <select onChange={(e) => this.handlePageSizeChange(e)} value={pageSize}>
@@ -329,8 +368,8 @@ class FilmManage extends Component {
                             className="my-3"
                             count={count}
                             page={page}
-                            siblingCount={1}
-                            boundaryCount={1}
+                            siblingCount={0}
+                            boundaryCount={2}
                             variant="outlined"
                             shape="rounded"
                             onChange={this.handlePageChange}
@@ -340,6 +379,8 @@ class FilmManage extends Component {
                         <FilmTable
                             getInfoFilmFromParent={this.getInfoFilmFromParent}
                             filmData={allFilm}
+                            page={0}
+                            pageSize={3}
                         />
                     </div>
                     {this.state.isOpen === true &&
@@ -366,6 +407,7 @@ const mapDispatchToProps = dispatch => {
     return {
         getAllcodeByTypeStart: () => dispatch(actions.getAllcodeByTypeStart()),
         createFilmStart: (data) => dispatch(actions.createFilmStart(data)),
+        editFilmStart: (data) => dispatch(actions.editFilmStart(data)),
         fetchAllFilmStart: (page, pageSize) => dispatch(actions.fetchAllFilmStart(page, pageSize)),
     };
 };
