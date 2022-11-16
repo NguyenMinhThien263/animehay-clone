@@ -17,18 +17,20 @@ class GenreList extends Component {
 
 
     componentDidMount() {
-        const { allCodeData } = this.props;
-        let genreData = allCodeData.genreData;
         this.props.getAllcodeByTypeStart();
-        this.setState({
-            isActiveHeader: true,
-            nameHeader: 'cate',
-            allcodeData: genreData,
-        })
     }
     componentDidUpdate(prevProps, prevState) {
         if (this.props.language !== prevProps.language) {
 
+        }
+        if (this.props.allCodeData.genreData !== prevProps.allCodeData.genreData) {
+            const { allCodeData } = this.props;
+            let genreData = allCodeData.genreData;
+            this.setState({
+                isActiveHeader: true,
+                nameHeader: 'cate',
+                allcodeData: genreData,
+            })
         }
 
     }

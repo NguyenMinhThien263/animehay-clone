@@ -3,6 +3,8 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
     allCodeData: [],
     filmData:[],
+    resAddUser:{},
+    userData:{},
 }
 
 const appReducer = (state = initialState, action) => {
@@ -39,6 +41,40 @@ const appReducer = (state = initialState, action) => {
         case actionTypes.FETCH_FILM_FAIL:
             copyState = { ...state };
             copyState.filmData = []
+            return {
+                ...copyState
+            }
+        case actionTypes.CREATE_USER_START:
+            copyState = { ...state };
+            return {
+                ...copyState
+            }
+        case actionTypes.CREATE_USER_SUCCESS:
+            copyState = { ...state };
+            copyState.resAddUser = action.data;
+            return {
+                ...copyState
+            }
+        case actionTypes.CREATE_USER_FAIL:
+            copyState = { ...state };
+            copyState.filmData = []
+            return {
+                ...copyState
+            }
+        case actionTypes.GET_USER_START:
+            copyState = { ...state };
+            return {
+                ...copyState
+            }
+        case actionTypes.GET_USER_SUCCESS:
+            copyState = { ...state };
+            copyState.userData = action.data;
+            return {
+                ...copyState
+            }
+        case actionTypes.GET_USER_FAIL:
+            copyState = { ...state };
+            copyState.userData = []
             return {
                 ...copyState
             }

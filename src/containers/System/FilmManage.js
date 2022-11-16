@@ -181,7 +181,6 @@ class FilmManage extends Component {
             })
         }
         this.setState({ page: 1 });
-        console.log('check click state', this.state);
     }
     getRequestParams = (page, pageSize) => {
         let params = {};
@@ -232,7 +231,6 @@ class FilmManage extends Component {
             previewImgURL: imageBase64,
             action: CRUD_ACTIONS.EDIT,
         });
-        console.log('check edit', this.state);
     }
     changeIntoDropdownValue = (data, name) => {
         let object = {};
@@ -253,8 +251,6 @@ class FilmManage extends Component {
     }
     render() {
         let { allFilm, filmName, subFilmName, scorePoint, totalEps, description, pageSize, count, page, pageSizes, action } = this.state;
-        // console.log('check props', this.props);
-        // console.log('check state', this.state);
         return (
             <div className="film-container">
                 <div className="title-page text-center">Quản lý phim</div>

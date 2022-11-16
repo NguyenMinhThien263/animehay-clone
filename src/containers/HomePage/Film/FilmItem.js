@@ -22,13 +22,19 @@ class FilmItem extends Component {
     }
 
     render() {
-        const {itemPage} = this.props;
+        const { itemPage, film } = this.props;
+        let imageBase64 = '';
+        if (film.image) {
+            imageBase64 = Buffer.from(film.image, 'base64').toString('binary');
+        }
         return (
-            <div className={`film-item ${itemPage?'item-page':''}`}>
-                <div className="image-film"></div>
-                <div className="text-film"><span>Berserk</span></div>
-                <div className="eps-film">9/??</div>
-                <div className="score-film">9.8/10</div>
+            <div className={`film-item ${itemPage ? 'item-page' : ''}`}>
+                <div className="image-film"
+                    style={{ backgroundImage: `url(${imageBase64})` }}
+                ></div>
+                <div className="text-film"><span>{film.title}</span></div>
+                <div className="eps-film">{film.totalEpisode} Tập</div>
+                <div className="score-film">{film.scrores}/10</div>
             </div>
         );
     }

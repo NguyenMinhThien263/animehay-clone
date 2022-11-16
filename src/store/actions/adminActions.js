@@ -6,6 +6,8 @@ import {
     getOneFilm,
     editFilm,
     deleteFilm,
+    addNewUser,
+    getUser,
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 //Allcode
@@ -81,14 +83,11 @@ export const fetchAllFilmStart = (page, size) => {
             })
             let res = await getAllFilms(page, size);
             if (res && res.errCode === 0) {
-                toast.success("Fetch success");
                 dispatch(fetchAllFilmSuccess(res.data))
             } else {
-                toast.error("Fetch failed");
                 dispatch(fetchAllFilmFail())
             }
         } catch (error) {
-            toast.error("Fetch failed");
             dispatch(fetchAllFilmFail())
             console.log(`${actionTypes.FETCH_FILM_FAIL}:`, error);
         }
@@ -153,4 +152,54 @@ export const deleteFilmSuccess = () => ({
 })
 export const deleteFilmFail = () => ({
     type: actionTypes.DELETE_FILM_FAIL,
+})
+
+//Create user
+export const addNewUserStart = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await addNewUser(data);
+            if (res) {
+                dispatch(addNewUserSuccess(res))
+            } else {
+                dispatch(addNewUserFail())
+            }
+        } catch (error) {
+            dispatch(addNewUserFail())
+            console.log(`${actionTypes.CREATE_USER_FAIL}:`, error);
+        }
+    }
+}
+
+export const addNewUserSuccess = (data) => ({
+    type: actionTypes.CREATE_USER_SUCCESS,
+    data
+})
+export const addNewUserFail = () => ({
+    type: actionTypes.CREATE_USER_FAIL,
+})
+//Get User
+export const getUserStart = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getUser(data);
+            console.log('cehck action', res);
+            if (res) {
+                dispatch(getUserSuccess(res))
+            } else {
+                dispatch(getUserFail())
+            }
+        } catch (error) {
+            dispatch(getUserFail())
+            console.log(`${actionTypes.GET_USER_FAIL}:`, error);
+        }
+    }
+}
+
+export const getUserSuccess = (data) => ({
+    type: actionTypes.GET_USER_SUCCESS,
+    data
+})
+export const getUserFail = () => ({
+    type: actionTypes.GET_USER_FAIL,
 })

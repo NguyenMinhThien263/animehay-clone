@@ -19,12 +19,6 @@ class Header extends Component {
         let menu = [];
         if (userInfo && !_.isEmpty(userInfo)) {
             let role = userInfo.roleId;
-            // if (role === USER_ROLE.ADMIN) {
-            //     menu = adminMenu;
-            // }
-            // if (role === USER_ROLE.DOCTOR) {
-            //     menu = doctorMenu
-            // }
         }
         this.setState({
             menuApp: menu

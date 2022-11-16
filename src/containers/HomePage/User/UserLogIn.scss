@@ -1,0 +1,111 @@
+.UserLogIn-container {
+    height        : 40em;
+    background    : #404040;
+    padding       : 10px;
+    margin-bottom : 10px;
+    border-radius : 5px;
+    box-sizing    : border-box;
+    display       : flex;
+    align-items   : center;
+    flex-direction: column;
+}
+
+.userLogIn-content {
+    width: 500px;
+}
+
+.custom-input {
+    width : 100%;
+    margin: 10px 0;
+
+    label {
+        display    : block;
+        font-weight: 500;
+        font-size  : 15px;
+    }
+
+    input {
+        line-height: 20px;
+        width      : 100%;
+        margin     : 10px 0;
+        padding    : 10px;
+        background : #c6cdd8;
+        opacity    : .8;
+        color      : #000;
+        box-sizing : border-box;
+    }
+
+    &.password-input {
+        .toggleEye {
+            color       : #000;
+            position    : absolute;
+            right       : 0;
+            margin-top  : 14px;
+            margin-right: 10px;
+
+            i {
+                padding  : 10px;
+                min-width: 40px;
+            }
+        }
+
+        input {
+            padding: 10px;
+        }
+    }
+}
+
+.red-txt {
+    color: red
+}
+
+.green-txt {
+    color: green
+}
+
+
+.custom-login {
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+
+    .sign-up-input {
+        background-color: #369e69;
+        color           : #fff;
+        display         : inline-flex;
+        border-radius   : 5px;
+        margin          : 0 2px;
+        padding         : 10px;
+        border-bottom   : 3px solid #292929;
+        cursor          : pointer;
+        border          : none;
+    }
+
+    .sign-in-input {
+        background-color: #b73a3a;
+        color           : #fff;
+        display         : inline-flex;
+        border-radius   : 5px;
+        margin          : 5px 0;
+        padding         : 10px 20px;
+        border-bottom   : 3px solid #292929;
+        cursor          : pointer;
+        border          : none;
+    }
+
+
+}
+
+.forget-pass {
+    margin: 0 10px;
+    color : #cac9c9;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    .UserLogIn-container {
+        .userLogIn-content {
+            width: 100%;
+        }
+    }
+}

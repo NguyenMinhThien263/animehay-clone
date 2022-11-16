@@ -3,3 +3,32 @@
 .main-container {
     background-color: #000;
 }
+
+.main-content {
+    width           : 1080px;
+    margin          : 0 auto;
+    background-color: #2d2d2d;
+    color           : #fff;
+}
+.dropdown {
+    button {
+        all: unset;
+
+        &:hover {
+            all: unset;
+        }
+}
+    }
+
+@media only screen and (max-width: 768px) {
+    .main-content {
+        width: 100% !important;
+
+        .homeheader-container {
+            .header-logo {
+                height: 50%;
+                width : 90px;
+            }
+        }
+    }
+}

@@ -26,8 +26,6 @@ class FilmTable extends Component {
     }
     handleDeleteUser = (film) => {
         let { page, pageSize } = this.props
-        console.log('check state', film);
-        console.log('check props', this.props);
         this.props.deleteFilmStart(film, page, pageSize);
     }
     render() {

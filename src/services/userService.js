@@ -17,6 +17,12 @@ const editFilm = (data) => {
 const deleteFilm = (id) => {
     return axios.delete(`/api/delete-film?id=${id}`)
 }
+const addNewUser = (data) => {
+    return axios.post(`/api/add-new-user`, data)
+}
+const getUser = (data) => {
+    return axios.post(`/api/get-user`, { email: data.email, password: data.password })
+}
 
 export {
     getAllcodeByType,
@@ -25,4 +31,6 @@ export {
     getOneFilm,
     editFilm,
     deleteFilm,
+    addNewUser,
+    getUser,
 }

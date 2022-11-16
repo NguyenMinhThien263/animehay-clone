@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 import GenreList from './Genre/GenreList';
+import UserComponent from './User/UserComponent';
+import { withRouter } from 'react-router';
 // import './HomeHeader.scss';
 class HomeHeader extends Component {
     constructor(props) {
@@ -11,6 +13,7 @@ class HomeHeader extends Component {
         this.state = {
             //UI
             isShowIcon: false,
+            nameIcon: '',
             dropdownOpen: false,
         };
     }
@@ -25,9 +28,10 @@ class HomeHeader extends Component {
         }
 
     }
-    handleShowIcon = () => {
+    handleShowIcon = (id) => {
         this.setState({
             isShowIcon: !this.state.isShowIcon,
+            nameIcon: id
         });
     }
     toggle = () => {
@@ -35,8 +39,13 @@ class HomeHeader extends Component {
             dropdownOpen: !this.state.dropdownOpen,
         });
     }
+    handleSignIn=()=>{
+        if (this.props.history) {
+            this.props.history.push(`/log-in`);
+        }
+    }
     render() {
-        const { isShowIcon } = this.state;
+        const { isShowIcon, nameIcon } = this.state;
         const { isMobile } = this.props;
 
         return (
@@ -44,7 +53,7 @@ class HomeHeader extends Component {
                 <div className="header-logo">
                     <div className="logo"></div>
                 </div>
-                {isShowIcon &&
+                {nameIcon === 'search' && isShowIcon &&
                     <div className="homeheader-search-bar">
                         <i className="fas fa-search"></i>
                         <input className="input-search" type="text"
@@ -53,10 +62,10 @@ class HomeHeader extends Component {
                     </div>
                 }
                 <div className="header-navigate">
-                    <div className={`custom-nav-link ${isShowIcon ? 'red-icon' : ''}`}
-                        onClick={() => this.handleShowIcon()}
+                    <div className={`custom-nav-link ${nameIcon === 'search' && isShowIcon ? 'red-icon' : ''}`}
+                        onClick={() => this.handleShowIcon('search')}
                     >
-                        {isShowIcon ?
+                        {nameIcon === 'search' && isShowIcon ?
                             <i className="far fa-times-circle"></i>
                             :
                             <i className="fas fa-search"></i>
@@ -79,15 +88,26 @@ class HomeHeader extends Component {
                     </div>
                     {this.props.isLoggedIn ?
                         <>
-                            <div className="custom-nav-link">
-                                <i className="far fa-user-circle"></i>
+                            <div className={`custom-nav-link ${nameIcon === 'user' && isShowIcon ? 'red-icon' : ''}`}
+                                onClick={() => this.handleShowIcon('user')}
+                            >
+                                <UserComponent
+                                isShowIcon={isShowIcon}
+                                nameIcon={nameIcon} />
+                                {nameIcon === 'user' && isShowIcon ?
+                                    <i className="far fa-times-circle"></i>
+                                    :
+                                    <i className="far fa-user-circle"></i>
+                                }
                             </div>
                             <div className="custom-nav-link">
                                 <i className="fas fa-bell"></i>
                             </div>
                         </>
                         :
-                        <div className="custom-nav-link">
+                        <div className="custom-nav-link"
+                        onClick={()=>this.handleSignIn()}
+                        >
                             <i className="fas fa-sign-out-alt"></i>
                         </div>
                     }
@@ -100,7 +120,8 @@ class HomeHeader extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+
     };
 };
 
@@ -109,4 +130,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeHeader));

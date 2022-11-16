@@ -6,6 +6,7 @@ import ProductManage from '../containers/System/ProductManage';
 import Header from '../containers/Header/Header';
 import './System.scss'
 
+
 class System extends Component {
     render() {
         const { systemMenuPath } = this.props;
