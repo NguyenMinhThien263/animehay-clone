@@ -8,6 +8,7 @@ import {
     deleteFilm,
     addNewUser,
     getUser,
+    getOneFilmBySearch,
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 //Allcode
@@ -100,6 +101,36 @@ export const fetchAllFilmSuccess = (data) => ({
 })
 export const fetchAllFilmFail = () => ({
     type: actionTypes.FETCH_FILM_FAIL,
+})
+//getFilmBySearch
+// GET_FILM_START_BY_SEARCH
+// GET_FILM_SUCCESS_BY_SEARCH
+// GET_FILM_FAIL_BY_SEARCH
+export const getFilmBySearchStart = (inputSearch) => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({
+                type: actionTypes.FETCH_FILM_START,
+            })
+            let res = await getOneFilmBySearch(inputSearch);
+            if (res && res.errCode === 0) {
+                dispatch(getFilmBySearchSuccess(res.data))
+            } else {
+                dispatch(getFilmBySearchFail())
+            }
+        } catch (error) {
+            dispatch(getFilmBySearchFail())
+            console.log(`${actionTypes.GET_FILM_FAIL_BY_SEARCH}:`, error);
+        }
+    }
+}
+
+export const getFilmBySearchSuccess = (data) => ({
+    type: actionTypes.GET_FILM_SUCCESS_BY_SEARCH,
+    data: data,
+})
+export const getFilmBySearchFail = () => ({
+    type: actionTypes.GET_FILM_FAIL_BY_SEARCH,
 })
 //EditFilm
 export const editFilmStart = (data) => {

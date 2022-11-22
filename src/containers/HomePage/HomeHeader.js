@@ -6,11 +6,13 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 import GenreList from './Genre/GenreList';
 import UserComponent from './User/UserComponent';
 import { withRouter } from 'react-router';
+import SearchBar from '../HomePage/Search/SearchBar';
 // import './HomeHeader.scss';
 class HomeHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {
+    
             //UI
             isShowIcon: false,
             nameIcon: '',
@@ -39,7 +41,7 @@ class HomeHeader extends Component {
             dropdownOpen: !this.state.dropdownOpen,
         });
     }
-    handleSignIn=()=>{
+    handleSignIn = () => {
         if (this.props.history) {
             this.props.history.push(`/log-in`);
         }
@@ -53,24 +55,29 @@ class HomeHeader extends Component {
                 <div className="header-logo">
                     <div className="logo"></div>
                 </div>
-                {nameIcon === 'search' && isShowIcon &&
-                    <div className="homeheader-search-bar">
-                        <i className="fas fa-search"></i>
-                        <input className="input-search" type="text"
-                            placeholder="Nhập từ khoá..."
-                        />
+                {isMobile === true ?
+                    <div className={`homeheader-search-bar`}>
+                        <SearchBar/>
+                    </div>
+                    :
+                    <div className={`homeheader-search-bar`}>
+                        {nameIcon === 'search' && isShowIcon &&
+                            <SearchBar />
+                        }
                     </div>
                 }
                 <div className="header-navigate">
-                    <div className={`custom-nav-link ${nameIcon === 'search' && isShowIcon ? 'red-icon' : ''}`}
-                        onClick={() => this.handleShowIcon('search')}
-                    >
-                        {nameIcon === 'search' && isShowIcon ?
-                            <i className="far fa-times-circle"></i>
-                            :
-                            <i className="fas fa-search"></i>
-                        }
-                    </div>
+                    {isMobile === false &&
+                        <div className={`custom-nav-link ${nameIcon === 'search' && isShowIcon ? 'red-icon' : ''}`}
+                            onClick={() => this.handleShowIcon('search')}
+                        >
+                            {nameIcon === 'search' && isShowIcon ?
+                                <i className="far fa-times-circle"></i>
+                                :
+                                <i className="fas fa-search"></i>
+                            }
+                        </div>
+                    }
                     <div className="custom-nav-link">
                         <Dropdown isOpen={this.state.dropdownOpen} toggle={() => this.toggle()}>
                             <DropdownToggle>
@@ -92,8 +99,8 @@ class HomeHeader extends Component {
                                 onClick={() => this.handleShowIcon('user')}
                             >
                                 <UserComponent
-                                isShowIcon={isShowIcon}
-                                nameIcon={nameIcon} />
+                                    isShowIcon={isShowIcon}
+                                    nameIcon={nameIcon} />
                                 {nameIcon === 'user' && isShowIcon ?
                                     <i className="far fa-times-circle"></i>
                                     :
@@ -106,7 +113,7 @@ class HomeHeader extends Component {
                         </>
                         :
                         <div className="custom-nav-link"
-                        onClick={()=>this.handleSignIn()}
+                            onClick={() => this.handleSignIn()}
                         >
                             <i className="fas fa-sign-out-alt"></i>
                         </div>

@@ -20,21 +20,29 @@
     }
 
     .homeheader-search-bar {
-        display        : flex;
-        align-items    : center;
-        justify-content: center;
-        padding        : 10px;
+        .searchBar-container {
+            .search-content {
+                display        : flex;
+                align-items    : center;
+                justify-content: center;
+                padding        : 10px;
 
-        i {
-            margin: 0 5px;
-        }
+                i {
+                    position: absolute;
+                    right   : 31%;
+                    margin  : 0 5px;
+                    cursor  : pointer;
+                }
 
-        .input-search {
-            width     : 400px;
-            height    : 30px;
-            background: #000;
-            outline   : none;
-            border    : none;
+                .input-search {
+                    width     : 400px;
+                    height    : 30px;
+                    background: #000;
+                    color     : #fff;
+                    outline   : none;
+                    border    : none;
+                }
+            }
         }
     }
 
@@ -143,5 +151,9 @@
                 width : 90px;
             }
         }
+    }
+
+    .homeheader-container .homeheader-search-bar .searchBar-container .search-content i {
+        right: 38%;
     }
 }

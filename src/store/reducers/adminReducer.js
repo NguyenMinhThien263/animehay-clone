@@ -2,9 +2,10 @@ import actionTypes from '../actions/actionTypes';
 
 const initialState = {
     allCodeData: [],
-    filmData:[],
-    resAddUser:{},
-    userData:{},
+    filmData: [],
+    resAddUser: {},
+    userData: {},
+    searchData: [],
 }
 
 const appReducer = (state = initialState, action) => {
@@ -75,6 +76,23 @@ const appReducer = (state = initialState, action) => {
         case actionTypes.GET_USER_FAIL:
             copyState = { ...state };
             copyState.userData = []
+            return {
+                ...copyState
+            }
+        case actionTypes.GET_FILM_START_BY_SEARCH:
+            copyState = { ...state };
+            return {
+                ...copyState
+            }
+        case actionTypes.GET_FILM_SUCCESS_BY_SEARCH:
+            copyState = { ...state };
+            copyState.searchData = action.data;
+            return {
+                ...copyState
+            }
+        case actionTypes.GET_FILM_FAIL_BY_SEARCH:
+            copyState = { ...state };
+            copyState.searchData = []
             return {
                 ...copyState
             }

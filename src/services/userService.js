@@ -23,6 +23,9 @@ const addNewUser = (data) => {
 const getUser = (data) => {
     return axios.post(`/api/get-user`, { email: data.email, password: data.password })
 }
+const getOneFilmBySearch = (inputSearch) => {
+    return axios.get(`/api/get-film-by-search?search=${inputSearch}`)
+}
 
 export {
     getAllcodeByType,
@@ -33,4 +36,5 @@ export {
     deleteFilm,
     addNewUser,
     getUser,
+    getOneFilmBySearch,
 }
