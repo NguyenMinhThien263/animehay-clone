@@ -12,8 +12,6 @@ import '../../../node_modules/slick-carousel/slick/slick-theme.css'
 import FilmItem from './Film/FilmItem';
 import { Pagination } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-// import "~slick-carousel/slick/slick.css"; 
-// import "~slick-carousel/slick/slick-theme.css";
 const theme = createTheme({
     palette: {
         neutral: {

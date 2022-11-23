@@ -26,6 +26,9 @@ const getUser = (data) => {
 const getOneFilmBySearch = (inputSearch) => {
     return axios.get(`/api/get-film-by-search?search=${inputSearch}`)
 }
+const getFilmsByGenre = (genre, page, size) => {
+    return axios.get(`/api/get-film-by-genre?genre=${genre}&page=${page}&size=${size}`)
+}
 
 export {
     getAllcodeByType,
@@ -37,4 +40,5 @@ export {
     addNewUser,
     getUser,
     getOneFilmBySearch,
+    getFilmsByGenre,
 }

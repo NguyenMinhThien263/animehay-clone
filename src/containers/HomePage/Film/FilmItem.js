@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { FormattedMessage } from 'react-intl';
 import './FilmItem.scss';
+import { withRouter } from 'react-router';
 class FilmItem extends Component {
     constructor(props) {
         super(props);
@@ -20,7 +21,12 @@ class FilmItem extends Component {
         }
 
     }
-
+    handleOnLinkFilm = (film) => {
+        console.log('check film', film);
+        if (this.props.history) {
+            this.props.history.push(`/info-film/${film.title}-${film.id}`);
+        }
+    }
     render() {
         const { itemPage, film } = this.props;
         let imageBase64 = '';
@@ -28,7 +34,9 @@ class FilmItem extends Component {
             imageBase64 = Buffer.from(film.image, 'base64').toString('binary');
         }
         return (
-            <div className={`film-item ${itemPage ? 'item-page' : ''}`}>
+            <div className={`film-item ${itemPage ? 'item-page' : ''}`}
+                onClick={() => this.handleOnLinkFilm(film)}
+            >
                 <div className="image-film"
                     style={{ backgroundImage: `url(${imageBase64})` }}
                 ></div>
@@ -51,4 +59,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilmItem);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FilmItem));

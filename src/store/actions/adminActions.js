@@ -9,6 +9,7 @@ import {
     addNewUser,
     getUser,
     getOneFilmBySearch,
+    getFilmsByGenre,
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 //Allcode
@@ -102,15 +103,39 @@ export const fetchAllFilmSuccess = (data) => ({
 export const fetchAllFilmFail = () => ({
     type: actionTypes.FETCH_FILM_FAIL,
 })
+//getAFilm
+export const fetchAFilmStart = (id) => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({
+                type: actionTypes.FETCH_AFILM_START,
+            })
+            let res = await getOneFilm(id);
+            if (res && res.errCode === 0) {
+                dispatch(fetchAFilmSuccess(res.data))
+            } else {
+                dispatch(fetchAFilmFail())
+            }
+        } catch (error) {
+            dispatch(fetchAFilmFail())
+            console.log(`${actionTypes.FETCH_AFILM_FAIL}:`, error);
+        }
+    }
+}
+
+export const fetchAFilmSuccess = (data) => ({
+    type: actionTypes.FETCH_AFILM_SUCCESS,
+    data: data,
+})
+export const fetchAFilmFail = () => ({
+    type: actionTypes.FETCH_AFILM_FAIL,
+})
 //getFilmBySearch
-// GET_FILM_START_BY_SEARCH
-// GET_FILM_SUCCESS_BY_SEARCH
-// GET_FILM_FAIL_BY_SEARCH
 export const getFilmBySearchStart = (inputSearch) => {
     return async (dispatch, getState) => {
         try {
             dispatch({
-                type: actionTypes.FETCH_FILM_START,
+                type: actionTypes.GET_FILM_START_BY_SEARCH,
             })
             let res = await getOneFilmBySearch(inputSearch);
             if (res && res.errCode === 0) {
@@ -131,6 +156,32 @@ export const getFilmBySearchSuccess = (data) => ({
 })
 export const getFilmBySearchFail = () => ({
     type: actionTypes.GET_FILM_FAIL_BY_SEARCH,
+})
+export const getFilmByGenreStart = (genre, page, size) => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({
+                type: actionTypes.GET_FILM_START_BY_GENRE,
+            })
+            let res = await getFilmsByGenre(genre, page, size);
+            if (res && res.errCode === 0) {
+                dispatch(getFilmByGenreSuccess(res.data))
+            } else {
+                dispatch(getFilmByGenreFail())
+            }
+        } catch (error) {
+            dispatch(getFilmByGenreFail())
+            console.log(`${actionTypes.GET_FILM_FAIL_BY_GENRE}:`, error);
+        }
+    }
+}
+
+export const getFilmByGenreSuccess = (data) => ({
+    type: actionTypes.GET_FILM_SUCCESS_BY_GENRE,
+    data: data,
+})
+export const getFilmByGenreFail = () => ({
+    type: actionTypes.GET_FILM_FAIL_BY_GENRE,
 })
 //EditFilm
 export const editFilmStart = (data) => {

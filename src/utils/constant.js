@@ -6,6 +6,8 @@ export const path = {
     SYSTEM: '/system',
     USER_LOGIN:'/log-in',
     USER_SIGNUP:'/sign-up',
+    CATEGORY:'/category/:id',
+    INFO_FILM:'/info-film/:id',
 };
 
 export const languages = {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { FormattedMessage } from 'react-intl';
 import './GenreItem.scss';
+import { withRouter } from 'react-router';
 class GenreItem extends Component {
     constructor(props) {
         super(props);
@@ -20,11 +21,18 @@ class GenreItem extends Component {
         }
 
     }
+    handleOnClickCatePage = (id) => {
+        if (this.props.history) {
+            this.props.history.push(`/category/${id}`);
+        }
+    }
 
     render() {
         const { keyMap, value } = this.props;
         return (
-            <div className="genre-item-container">
+            <div className="genre-item-container"
+                onClick={() => this.handleOnClickCatePage(keyMap)}
+            >
                 <div className="genre-item-value">{value}</div>
             </div>
         );
@@ -42,4 +50,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GenreItem);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GenreItem));

@@ -31,7 +31,6 @@ class SearchBar extends Component {
 
     }
     handleSearchFilm = () => {
-        console.log("check click search bar", this.state);
     }
     handleOnChangeSearch = (e) => {
         let name = e.target.name;
@@ -41,7 +40,6 @@ class SearchBar extends Component {
     }
     render() {
         let { filmData } = this.state
-        console.log("check state search bar", this.state);
         return (
             <div className="searchBar-container">
                 <div className="search-content">

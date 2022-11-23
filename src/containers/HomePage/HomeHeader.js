@@ -12,8 +12,9 @@ class HomeHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {
-    
+
             //UI
+            windowWidth: window.innerWidth,
             isShowIcon: false,
             nameIcon: '',
             dropdownOpen: false,
@@ -22,13 +23,22 @@ class HomeHeader extends Component {
 
 
     componentDidMount() {
-
+        this.resizeScreen();
     }
     componentDidUpdate(prevProps, prevState) {
         if (this.props.language !== prevProps.language) {
 
         }
-
+        if (this.state.windowWidth !== prevState.windowWidth) {
+            this.resizeScreen();
+        }
+    }
+    resizeScreen = () => {
+        window.addEventListener('resize', () => {
+            this.setState({
+                windowWidth: window.innerWidth
+            });
+        }, false);
     }
     handleShowIcon = (id) => {
         this.setState({
@@ -46,18 +56,25 @@ class HomeHeader extends Component {
             this.props.history.push(`/log-in`);
         }
     }
+    handleClickLogo = () => {
+        if (this.props.history) {
+            this.props.history.push(`/home`);
+        }
+    }
     render() {
+        const { windowWidth, count, page } = this.state;
+        let isMobile = windowWidth > 1200
         const { isShowIcon, nameIcon } = this.state;
-        const { isMobile } = this.props;
-
         return (
             <div className={`homeheader-container ${isMobile ? 'mobile' : ''}`}>
-                <div className="header-logo">
+                <div className="header-logo"
+                    onClick={() => this.handleClickLogo()}
+                >
                     <div className="logo"></div>
                 </div>
                 {isMobile === true ?
                     <div className={`homeheader-search-bar`}>
-                        <SearchBar/>
+                        <SearchBar />
                     </div>
                     :
                     <div className={`homeheader-search-bar`}>

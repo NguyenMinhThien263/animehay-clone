@@ -23,6 +23,8 @@ import ConfirmModal from '../components/ConfirmModal';
 import CustomScrollbars from '../components/CustomScrollbars';
 import 'react-image-lightbox/style.css';
 import UserSignUp from './HomePage/User/UserSignUp';
+import CategoryResult from './HomePage/Category/CategoryResult';
+import DetailFilm from './HomePage/DetailFilm/DetailFilm';
 
 class App extends Component {
 
@@ -58,6 +60,8 @@ class App extends Component {
                                     <Route path={path.USER_LOGIN} component={UserLogIn} />
                                     <Route path={path.USER_SIGNUP} component={UserSignUp} />
                                     <Route path={path.HOMEPAGE} component={(HomePage)} />
+                                    <Route path={path.CATEGORY} component={(CategoryResult)} />
+                                    <Route path={path.INFO_FILM} component={(DetailFilm)} />
                                 </Switch>
                             </div>
                         </CustomScrollbars>

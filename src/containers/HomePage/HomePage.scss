@@ -7,7 +7,8 @@
 
     .header-logo {
         height: 50%;
-        width : inherit;
+        width : 30%;
+        cursor: pointer;
 
         .logo {
             height             : 50px;
@@ -22,6 +23,7 @@
     .homeheader-search-bar {
         .searchBar-container {
             .search-content {
+                position       : relative;
                 display        : flex;
                 align-items    : center;
                 justify-content: center;
@@ -29,7 +31,7 @@
 
                 i {
                     position: absolute;
-                    right   : 31%;
+                    right   : 1em;
                     margin  : 0 5px;
                     cursor  : pointer;
                 }
@@ -148,12 +150,12 @@
 
             .header-logo {
                 height: 50%;
-                width : 90px;
+                width : 10%;
             }
         }
     }
 
     .homeheader-container .homeheader-search-bar .searchBar-container .search-content i {
-        right: 38%;
+        right: 1em;
     }
 }

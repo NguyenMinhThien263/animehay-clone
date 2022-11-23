@@ -1,7 +1,7 @@
 .userComponent-container {
     position        : absolute;
     top             : 8%;
-    right           : 2%;
+    right           : 15%;
     z-index         : 12;
     display         : none;
     flex-direction  : column;
@@ -67,4 +67,10 @@
 .onClick {
     display  : flex;
     transform: scale(1);
+}
+
+@media only screen and (max-width: 768px) {
+    .userComponent-container {
+        right: 2%;
+    }
 }

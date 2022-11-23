@@ -1,0 +1,23 @@
+.category-result-container {
+    display       : flex;
+    flex-direction: column;
+
+    .list-film {
+        display      : flex;
+        flex-wrap    : wrap;
+        align-items  : center;
+        background   : #404040;
+        padding      : 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    .pagination-container {
+        display        : flex;
+        justify-content: center;
+    }
+
+    .MuiPaginationItem-root {
+        color: #fff !important;
+    }
+}

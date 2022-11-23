@@ -23,8 +23,6 @@ class SearchResult extends Component {
 
     render() {
         let { filmData } = this.props;
-        console.log('check props', this.props);
-
         return (
             <div className="search-result-container">
                 {filmData && filmData.length > 0 ?

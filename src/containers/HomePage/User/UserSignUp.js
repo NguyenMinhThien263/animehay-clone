@@ -51,7 +51,6 @@ class UserSignUp extends Component {
                 password: password,
             })
             let { resAddUser } = this.props;
-            console.log('check props', this.props);
             if (resAddUser && resAddUser.errCode !== 0) {
                 this.setState({ errMessage: resAddUser.errMessage });
             }
@@ -74,7 +73,6 @@ class UserSignUp extends Component {
     }
     render() {
         let { username, email, password } = this.state;
-        console.log('check state', this.state);
         return (
             <>
                 <HomeHeader />
