@@ -22,7 +22,6 @@ class FilmItem extends Component {
 
     }
     handleOnLinkFilm = (film) => {
-        console.log('check film', film);
         if (this.props.history) {
             this.props.history.push(`/info-film/${film.title}-${film.id}`);
         }

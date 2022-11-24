@@ -20,11 +20,17 @@ class SearchResult extends Component {
         }
 
     }
+    handleOnLinkFilm = (film) => {
+        if (this.props.history) {
+            this.props.history.push(`/info-film/${film.title}-${film.id}`);
+        }
+    }
 
     render() {
         let { filmData } = this.props;
         return (
-            <div className="search-result-container">
+            <div className="search-result-container"
+            onClick={() => this.handleOnLinkFilm(filmData)}>
                 {filmData && filmData.length > 0 ?
                     <div className="search-result-content">
                         {filmData.map((item, index) => {
